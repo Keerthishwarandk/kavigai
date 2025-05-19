@@ -52,11 +52,27 @@
         });
 
         const data = await response.json();
-        if (data.roadmap) {
-          output.innerText = data.roadmap;
-        } else {
-          output.innerText = "Failed to generate roadmap. Please try again.";
-        }
+       if (data.roadmap) {
+    // Clear previous results
+    output.innerHTML = '';
+
+    // Create a list element
+    const ul = document.createElement('ul');
+
+    for (const step in data.roadmap) {
+        const item = data.roadmap[step];
+        
+        const li = document.createElement('li');
+        li.innerHTML = `<strong>${step}:</strong> <a href="${item.link}" target="_blank">${item.title}</a>`;
+        ul.appendChild(li);
+    }
+
+    output.appendChild(ul);
+} else {
+    output.innerText = "Failed to generate roadmap. Please try again.";
+}
+
+
       } catch (err) {
         output.innerText = "Error contacting server. Is Flask running?\n" + err;
       }
