@@ -52,7 +52,9 @@
         });
 
         const data = await response.json();
-        if (data.roadmap) {
+        if (data) {
+            console.log(data);
+            
           output.innerText = data.roadmap;
         } else {
           output.innerText = "Failed to generate roadmap. Please try again.";
