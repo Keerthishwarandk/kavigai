@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Goal Roadmap Generator</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 2rem;
+      max-width: 600px;
+      margin: auto;
+    }
+    input, textarea, button {
+      width: 100%;
+      margin: 0.5rem 0;
+      padding: 0.75rem;
+      font-size: 1rem;
+    }
+    #output {
+      white-space: pre-wrap;
+      background: #f3f3f3;
+      padding: 1rem;
+      border-radius: 6px;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>AI-Powered Roadmap Generator</h2>
+
+  <label for="goal">Enter your goal:</label>
+  <input type="text" id="goal" placeholder="e.g., To become a Java Developer" />
+
+  <button onclick="generateRoadmap()">Generate Roadmap</button>
+
+  <h3>Roadmap:</h3>
+  <div id="output">Your roadmap will appear here...</div>
+
+  <script>
+    async function generateRoadmap() {
+      const goal = document.getElementById('goal').value;
+      const output = document.getElementById('output');
+      output.innerText = "Generating... Please wait.";
+
+      try {
+        const response = await fetch('http://127.0.0.1:5000/gen-web-links', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ goal: goal })
+        });
+
+        const data = await response.json();
+        if (data.roadmap) {
+          output.innerText = data.roadmap;
+        } else {
+          output.innerText = "Failed to generate roadmap. Please try again.";
+        }
+      } catch (err) {
+        output.innerText = "Error contacting server. Is Flask running?\n" + err;
+      }
+    }
+  </script>
+
+</body>
+</html>
