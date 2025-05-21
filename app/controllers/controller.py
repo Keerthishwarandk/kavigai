@@ -1,5 +1,6 @@
 from googleapiclient.discovery import build
 
+from ..models.deepseekapi import deepseek
 def google_custom_search(api_key, cse_id, query, num_results=10):
     service = build("customsearch", "v1", developerKey=api_key)
     res = service.cse().list(q=query, cx=cse_id, num=num_results).execute()
@@ -13,6 +14,12 @@ def google_custom_search(api_key, cse_id, query, num_results=10):
                 'snippet': item.get('snippet')
             })
     return results
+
+
+
+def get_goal_template(query,startdate,end_date):
+    result = deepseek(query,startdate,end_date)
+    return result 
 
 # === Replace these with your credentials ===
 
