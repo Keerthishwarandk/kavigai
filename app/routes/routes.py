@@ -14,3 +14,5 @@ def generate():
     CSE_ID = "b4ef5beef8dc14fed"
     weblinks = google_custom_search(API_KEY, CSE_ID, goal)
     return jsonify({"goal": goal, "roadmap": weblinks})
+
+
