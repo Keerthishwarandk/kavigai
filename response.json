@@ -1,0 +1,33 @@
+{
+    "goal_name":"frond end developer",
+    "start_date":"12-05-2025",
+    "end_date":"2-09-2025",
+    "goal_template":[
+
+        {
+            "title":"title of task",
+            "start_date":"start date",
+            "end_date":"end date",
+            "description":"breaf description of task"
+        },
+        {
+            "title":"title of task",
+            "start_date":"start date",
+            "end_date":"end date",
+            "description":"breaf description of task"
+        },
+        {
+            "title":"title of task",
+            "start_date":"start date",
+            "end_date":"end date",
+            "description":"breaf description of task"
+        },
+        {
+            "title":"title of task",
+            "start_date":"start date",
+            "end_date":"end date",
+            "description":"breaf description of task"
+        },
+    ]
+
+}

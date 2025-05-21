@@ -31,13 +31,18 @@
   <label for="goal">Enter your goal:</label>
   <input type="text" id="goal" placeholder="e.g., To become a Java Developer" />
 
+   <label for="fromdate">From Date:</label>
+  <input type="date" id="fromdate"  />
+   <label for="todate">To Date:</label>
+  <input type="date" id="todate"  />
+
   <button onclick="generateRoadmap()">Generate Roadmap</button>
-  <button onclick="getTips()">Get Tips</button>
+  <button onclick="generatewesite()">Generate Websites</button>
   <h3>Roadmap:</h3>
   <div id="output">Your roadmap will appear here...</div>
 
   <script>
-    async function generateRoadmap() {
+    async function generatewesite() {
       const goal = document.getElementById('goal').value;
       const output = document.getElementById('output');
       output.innerText = "Generating... Please wait.";
@@ -78,30 +83,51 @@
       }
     }
 
-    async function getTips() {
+    async function generateRoadmap() {
     const goal = document.getElementById('goal').value;
+    const from_date= document.getElementById('fromdate').value;
+    const to_date = document.getElementById('todate').value;
     const output = document.getElementById('output');
-    output.innerText = "Fetching tips... Please wait.";
+    output.innerText = "Fetching Goal Template... Please wait.";
 
     try {
-      const response = await fetch('http://127.0.0.1:5000/get-tips', {
+      const response = await fetch('http://127.0.0.1:5000/gen-goal-template', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ goal: goal })
+        body: JSON.stringify({goaltemp:goal,fromdate:from_date,todate:to_date})
       });
 
       const data = await response.json();
 
-      if (data.tips) {
-        output.innerHTML = "<strong>Tips:</strong><br><ul>";
+      if (data.roadmap) {
+        // output.innerHTML = JSON.stringify(data.roadmap);
+          const raw_data = JSON.parse(data.roadmap);
+          console.log(raw_data);
+          
+         const holder = document.createElement('div');
+         
 
-        for (const tip of data.tips) {
-          output.innerHTML += `<li>${tip}</li>`;
-        }
+          raw_data.goal_template.forEach(element => {
+            const main_div = document.createElement('div');
+            const content = `<div>
+              Title:${element.title}
+              start Date : ${element.start_date}
+              End Date : ${element.end_date}
+              Description : ${element.description}
+              
+              </div>`;
 
-        output.innerHTML += "</ul>";
+              main_div.innerHTML = content;
+              holder.appendChild(main_div);
+
+          });
+
+          output.innerHTML = holder.outerHTML;
+          
+
+       
       } else {
         output.innerText = "No tips received.";
       }
