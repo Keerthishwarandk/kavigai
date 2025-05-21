@@ -32,7 +32,7 @@
   <input type="text" id="goal" placeholder="e.g., To become a Java Developer" />
 
   <button onclick="generateRoadmap()">Generate Roadmap</button>
-
+  <button onclick="getTips()">Get Tips</button>
   <h3>Roadmap:</h3>
   <div id="output">Your roadmap will appear here...</div>
 
@@ -77,6 +77,38 @@
         output.innerText = "Error contacting server. Is Flask running?\n" + err;
       }
     }
+
+    async function getTips() {
+    const goal = document.getElementById('goal').value;
+    const output = document.getElementById('output');
+    output.innerText = "Fetching tips... Please wait.";
+
+    try {
+      const response = await fetch('http://127.0.0.1:5000/get-tips', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ goal: goal })
+      });
+
+      const data = await response.json();
+
+      if (data.tips) {
+        output.innerHTML = "<strong>Tips:</strong><br><ul>";
+
+        for (const tip of data.tips) {
+          output.innerHTML += `<li>${tip}</li>`;
+        }
+
+        output.innerHTML += "</ul>";
+      } else {
+        output.innerText = "No tips received.";
+      }
+    } catch (err) {
+      output.innerText = "Error fetching tips.\n" + err;
+    }
+  }
   </script>
 
 </body>

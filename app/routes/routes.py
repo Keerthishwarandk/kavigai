@@ -16,6 +16,8 @@ def generate():
     return jsonify({"goal": goal, "roadmap": weblinks})
 
 
+
+
 @web_link_bp.route('/gen-goal-template', methods=['POST'])
 def generate_goal_template():
     data = request.json
