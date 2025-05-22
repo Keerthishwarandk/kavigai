@@ -27,7 +27,7 @@
             "start_date":"start date",
             "end_date":"end date",
             "description":"breaf description of task"
-        },
+        }
     ]
 
 }

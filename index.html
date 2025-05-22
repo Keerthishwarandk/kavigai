@@ -37,6 +37,9 @@
   <input type="date" id="todate"  />
 
   <button onclick="generateRoadmap()">Generate Roadmap</button>
+
+  <button onclick="gen_goal_llm()">Generate Roadmap using LLM</button>
+
   <button onclick="generatewesite()">Generate Websites</button>
   <h3>Roadmap:</h3>
   <div id="output">Your roadmap will appear here...</div>
@@ -135,6 +138,38 @@
       output.innerText = "Error fetching tips.\n" + err;
     }
   }
+
+
+
+    async function gen_goal_llm() {
+    const goal = document.getElementById('goal').value;
+    const from_date= document.getElementById('fromdate').value;
+    const to_date = document.getElementById('todate').value;
+    const output = document.getElementById('output');
+    output.innerText = "Fetching Goal Template... Please wait.";
+
+    try {
+      const response = await fetch('http://127.0.0.1:5000/gen-goal-llm', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({goal:goal})
+      });
+
+      const data = await response.json();
+
+      if (data.roadmap) {
+         output.innerHTML = JSON.stringify(data.roadmap);
+          
+      } else {
+        output.innerText = "No tips received.";
+      }
+    } catch (err) {
+      output.innerText = "Error fetching tips.\n" + err;
+    }
+  }
+
   </script>
 
 </body>
