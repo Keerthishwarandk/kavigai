@@ -27,7 +27,7 @@ def deepseek(parm,from_date,to_date):
     )
     client = OpenAI(
         base_url="https://openrouter.ai/api/v1",
-        api_key="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",  # Replace with your actual API key
+        api_key="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",  # Replace with your actual API key
     )
 
     completion = client.chat.completions.create(
