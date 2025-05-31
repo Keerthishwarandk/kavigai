@@ -1,0 +1,11 @@
+Backend Developer Roadmap :
+
+	1. Programming Languages – Python, Java, Node.js.
+	2. Database Management – SQL, NoSQL, PostgreSQL.
+	3. API Development – REST, GraphQL.
+	4. Authentication & Security – JWT, OAuth, encryption.
+	5. Cloud & DevOps – AWS, Docker, Kubernetes.
+	6. Version Control – Git & GitHub.
+	7. Testing & Debugging – Unit testing, integration testing.
+	8. Performance Optimization – Caching, load balancing.
+	9. Build Projects – Scalable backend systems.

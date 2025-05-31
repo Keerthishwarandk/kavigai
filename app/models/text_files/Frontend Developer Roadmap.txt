@@ -1,0 +1,11 @@
+Frontend Developer Roadmap :
+
+	1. HTML & CSS – Semantic HTML, Flexbox, Grid.
+	2. JavaScript – ES6+, DOM manipulation.
+	3. Frontend Frameworks – React.js, Vue.js, Angular.
+	4. State Management – Redux, Context API.
+	5. Responsive Design – Media queries, Bootstrap.
+	6. Version Control – Git & GitHub.
+	7. Testing & Debugging – Jest, Cypress.
+	8. Performance Optimization – Lazy loading, caching.
+	9. Build Projects – UI/UX-focused applications.
