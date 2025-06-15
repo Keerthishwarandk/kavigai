@@ -24,8 +24,8 @@ def get_goal_template(query,startdate,end_date):
     return result 
 
 
-def get_goal_template_llm(query):
-    result = start_llm(query)
+def get_goal_template_llm(query,fdate,tdate):
+    result = start_llm(query,fdate,tdate)
     return result
 
 # === Replace these with your credentials ===

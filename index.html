@@ -154,17 +154,20 @@
         headers: {
           'Content-Type': 'application/json'
         },
+        
         body: JSON.stringify({goal:goal,fromdate:from_date,todate:to_date})
       });
-
-      const data = await response.json();
+        const data = await response.json();
 
       if (data.roadmap) {
-         output.innerHTML = JSON.stringify(data.roadmap);
+        console.log(data.roadmap);
+        console.log(JSON.parse(data.roadmap));
+        output.innerHTML = JSON.parse(data.roadmap);
           
       } else {
         output.innerText = "No tips received.";
       }
+      
     } catch (err) {
       output.innerText = "Error fetching tips.\n" + err;
     }

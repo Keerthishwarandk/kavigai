@@ -38,9 +38,11 @@ def generate_goal_template():
 def generate_using_llm():
     data = request.json
     goal = data.get('goal')
+    fdate = data.get('fromdate')
+    tdate = data.get('todate')
     if not goal:
         return jsonify({"error": "Goal is required"}), 400
     
     
-    response = get_goal_template_llm(goal)
+    response = get_goal_template_llm(goal,fdate,tdate)
     return jsonify({"goal": goal, "roadmap": response})
