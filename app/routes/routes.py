@@ -1,5 +1,6 @@
 from flask import Blueprint, request, jsonify
-from app.controllers.controller import google_custom_search , get_goal_template
+from app.controllers.controller import google_custom_search , get_goal_template, get_goal_template_llm
+
 
 web_link_bp = Blueprint('weblink', __name__)
 
@@ -30,3 +31,16 @@ def generate_goal_template():
    
     templates = get_goal_template(goal,fromdate,todate)
     return jsonify({"goal": goal, "roadmap": templates})
+
+
+
+@web_link_bp.route('/gen-goal-llm', methods=['POST'])
+def generate_using_llm():
+    data = request.json
+    goal = data.get('goal')
+    if not goal:
+        return jsonify({"error": "Goal is required"}), 400
+    
+    
+    response = get_goal_template_llm(goal)
+    return jsonify({"goal": goal, "roadmap": response})

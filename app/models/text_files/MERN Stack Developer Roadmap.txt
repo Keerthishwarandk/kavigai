@@ -1,0 +1,10 @@
+MERN Stack Developer Roadmap :
+
+	1. Learn JavaScript – ES6+, async/await, closures.
+	2. Frontend Development – React.js, Redux.
+	3. Backend Development – Node.js, Express.js.
+	4. Database Management – MongoDB, Mongoose.
+	5. REST APIs & Authentication – JWT, OAuth.
+	6. Version Control – Git & GitHub.
+	7. Deployment – Docker, CI/CD, AWS.
+	8. Build Projects – Full-stack applications.
