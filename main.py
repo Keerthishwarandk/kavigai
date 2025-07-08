@@ -1,8 +1,8 @@
 from app import createApp
 from flask_cors import CORS
 app = createApp()
+CORS(app)
 
 
 if __name__ == "__main__":
-    CORS(app)
     app.run(debug=True)

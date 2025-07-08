@@ -2,8 +2,9 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Goal Roadmap Generator</title>
-  <style>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+    <style>
     body {
       font-family: Arial, sans-serif;
       padding: 2rem;
@@ -36,14 +37,17 @@
    <label for="todate">To Date:</label>
   <input type="date" id="todate"  />
 
-  <button onclick="generateRoadmap()">Generate Roadmap</button>
+  <button type="button" onclick="generateRoadmap();">Generate Roadmap</button>
 
-  <button onclick="gen_goal_llm()">Generate Roadmap using LLM</button>
+  <button type="button" onclick="gen_goal_llm(event);">Generate Roadmap using LLM</button>
 
-  <button onclick="generatewesite()">Generate Websites</button>
+  <button type="button" onclick="generatewesite();">Generate Websites</button>
   <h3>Roadmap:</h3>
   <div id="output">Your roadmap will appear here...</div>
 
+
+
+</body>
   <script>
     async function generatewesite() {
       const goal = document.getElementById('goal').value;
@@ -51,7 +55,7 @@
       output.innerText = "Generating... Please wait.";
 
       try {
-        const response = await fetch('http://127.0.0.1:5000/gen-web-links', {
+        const response = await fetch('http://localhost:5000/gen-web-links', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
@@ -94,7 +98,7 @@
     output.innerText = "Fetching Goal Template... Please wait.";
 
     try {
-      const response = await fetch('http://127.0.0.1:5000/gen-goal-template', {
+      const response = await fetch('http://localhost:5000/gen-goal-template', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -141,7 +145,8 @@
 
 
 
-    async function gen_goal_llm() {
+    async function gen_goal_llm(event) {
+    if (event) event.preventDefault(); 
     const goal = document.getElementById('goal').value;
     const from_date= document.getElementById('fromdate').value;
     const to_date = document.getElementById('todate').value;
@@ -149,31 +154,42 @@
     output.innerText = "Fetching Goal Template... Please wait.";
 
     try {
-      const response = await fetch('http://127.0.0.1:5000/gen-goal-llm', {
+      const response = await fetch('http://localhost:5000/gen-goal-llm', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
-        
         body: JSON.stringify({goal:goal,fromdate:from_date,todate:to_date})
       });
-        const data = await response.json();
+
+      const data = await response.json();
 
       if (data.roadmap) {
-        console.log(data.roadmap);
-        console.log(JSON.parse(data.roadmap));
-        output.innerHTML = JSON.parse(data.roadmap);
+
+        
+        
+        //output.innerHTML = <pre>${JSON.parse(data.roadmap, null, 2)}</pre>;
+
+        const parsed = JSON.parse(data.roadmap);
+        const roadmap = data.roadmap;
+        output.innerHTML = `<pre>${JSON.stringify(parsed, null, 2)}</pre>`;
+        //const raw_data = JSON.parse(data.roadmap);
+        //console.log(raw_data);
+
+
           
       } else {
         output.innerText = "No tips received.";
       }
-      
     } catch (err) {
       output.innerText = "Error fetching tips.\n" + err;
     }
   }
 
-  </script>
+  window.addEventListener('beforeunload', function (e) {
+ alert("Page is trying to unload!");
+});
 
-</body>
+
+  </script>
 </html>

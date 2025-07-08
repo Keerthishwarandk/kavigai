@@ -45,4 +45,4 @@ def generate_using_llm():
     
     
     response = get_goal_template_llm(goal,fdate,tdate)
-    return jsonify({"goal": goal, "roadmap": response})
+    return jsonify({"goal":goal, "roadmap":response})
